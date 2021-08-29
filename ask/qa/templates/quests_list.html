@@ -3,38 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Quests_list</title>
-    <style type="text/css">
-        div {
-            margin-left: 10%;
-            margin-right: 10%;
-        }
-        .pagination {
-            justify-content: center;
-        }
-    </style>
 
 </head>
 <body>
-<div>
+<div class="pagination">
     {% for quest in quests %}
-    <div>{{quest.title}}</div>
-    <a href="{{ quest.get_url }}">{{ quest }}</a>
+    <div>
+        <h3>{{quest.title}}</h3>
+        <a href="{{ quest.get_url }}">Go</a>
+    </div>
     <hr>
     {% endfor %}
 </div>
-<nav>
-    <ul class="pagination">
-        {% for p in paginator.page_range %}
-        {% if p == page.number %}
-        <li class="active">
-        {% else %}
-        <li>
-        {% endif %}
-            <a href="{{ paginator.baseurl  }}{{p}}">
-                {{ p }}</a>
-        </li>
-        {% endfor %}
-    </ul>
+<div class="pagination">
+	<span class="step-links">
+		{% if quests.has_previous %}
+			<a href="?page={{ quests.previous_page_number }}">previous</a>
+		{% endif %}
+		<span class="current">
+			Page {{ quests.number }} of {{ quests.paginator.num_pages }}.
+		</span>
+		{% if quests.has_next %}
+			<a href="?page={{ quests.next_page_number }}">next</a>
+		{% endif %}
+	</span>
+</div>
 </nav>
 </body>
 </html>
