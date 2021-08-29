@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage
 from .models import Question
+from .forms import AskForm
 
 
 def test(request, *args, **kwargs):
@@ -42,7 +43,21 @@ def quests_list_popular(request):
 def get_quest(request, id):
     question = get_object_or_404(Question, pk=id)
     answers = question.answer_set.all()
-    return render(request, 'quests.html', {
+    return render(request, 'questions.html', {
         'question': question,
         'answers': answers,
+    })
+
+
+def post_add(request):
+    if request.method == 'POST':
+        form = AskForm(request.POST)
+        if form.is_valid():
+            question = form.save()
+            url = question.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'question_add.html', {
+        'form': form
     })
