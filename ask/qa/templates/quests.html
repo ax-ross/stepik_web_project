@@ -9,5 +9,12 @@
         <h1>{{question.title}}</h1>
         <p>{{question.text}}</p>
     </div>
+    <div>
+        {%for answer in answers%}
+        <div>
+            {{answer}}
+        </div>
+        {%endfor%}
+    </div>
 </body>
 </html>

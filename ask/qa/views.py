@@ -41,6 +41,8 @@ def quests_list_popular(request):
 
 def get_quest(request, id):
     question = get_object_or_404(Question, pk=id)
+    answers = question.answer_set.all()
     return render(request, 'quests.html', {
-        'question': question
+        'question': question,
+        'answers': answers,
     })
