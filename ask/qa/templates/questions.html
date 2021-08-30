@@ -8,6 +8,7 @@
     <div>
         <h1>{{question.title}}</h1>
         <p>{{question.text}}</p>
+        <p>{{question.author}}</p>
     </div>
     <hr>
     <form action="" method="post">
@@ -22,6 +23,7 @@
         {%for answer in answers%}
         <div>
             {{answer.text}}
+            {{answer.author}}
         </div>
         <hr>
         {%endfor%}

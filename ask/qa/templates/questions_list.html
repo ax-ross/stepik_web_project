@@ -10,6 +10,7 @@
     {%for question in questions %}
     <li>
         <p>{{question.title}}</p>
+        <p>{{question.author}}</p>
         <p><a href="{{question.get_url}}">Go</a></p>
     </li>
     {%endfor%}

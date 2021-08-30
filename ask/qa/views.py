@@ -46,6 +46,7 @@ def quests_list_popular(request):
 def get_quest(request, id):
     if request.method == 'POST':
         form = AnswerForm(request.POST)
+        form._user = request.user
         if form.is_valid():
             answer = form.save()
             url = answer.get_url()
@@ -64,6 +65,7 @@ def get_quest(request, id):
 def post_add(request):
     if request.method == 'POST':
         form = AskForm(request.POST)
+        form._user = request.user
         if form.is_valid():
             question = form.save()
             url = question.get_url()

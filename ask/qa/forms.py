@@ -8,13 +8,13 @@ from django.contrib.auth.models import User
 class AskForm(ModelForm):
     class Meta:
         model = Question
-        fields = ['title', 'text']
+        fields = ['title', 'text', 'author']
 
 
 class AnswerForm(ModelForm):
     class Meta:
         model = Answer
-        fields = ['text', 'question']
+        fields = ['text', 'question', 'author']
 
 
 class SignUpForm(UserCreationForm):
