@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^$', views.questions_list_all, name='index'),
     re_path('^login/.*$', views.test, name='login'),
-    re_path(r'^signup/.*$', views.test, name='signup'),
+    re_path(r'^signup/.*$', views.signup, name='signup'),
     re_path(r'^question/(?P<id>[0-9]+)/$', views.get_quest, name='question'),
     re_path(r'^ask/.*$', views.post_add, name='ask'),
     re_path(r'^popular/.*$', views.quests_list_popular, name='popular'),
