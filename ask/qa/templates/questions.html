@@ -9,11 +9,21 @@
         <h1>{{question.title}}</h1>
         <p>{{question.text}}</p>
     </div>
+    <hr>
+    <form action="" method="post">
+        {%csrf_token%}
+        <table>
+            {{form}}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+    <hr>
     <div>
         {%for answer in answers%}
         <div>
             {{answer.text}}
         </div>
+        <hr>
         {%endfor%}
     </div>
 </body>
