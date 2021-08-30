@@ -3,6 +3,7 @@ from .models import Question, Answer
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 
 class AskForm(ModelForm):
@@ -17,11 +18,13 @@ class AnswerForm(ModelForm):
         fields = ['text', 'question', 'author']
 
 
-class SignUpForm(ModelForm):
+class SignUpForm(forms.Form):
     username = forms.CharField(max_length=100)
     email = forms.EmailField(widget=forms.EmailInput)
     password = forms.CharField(widget=forms.PasswordInput)
 
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
+    def save(self):
+        user = User.objects.create_user(**self.cleaned_data)
+        user.save()
+        auth = authenticate(**self.cleaned_data)
+        return auth
