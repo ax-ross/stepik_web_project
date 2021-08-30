@@ -83,7 +83,7 @@ def signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
-            raw_password = form.cleaned_data['password1']
+            raw_password = form.cleaned_data['password']
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return HttpResponseRedirect('/?page=1')
