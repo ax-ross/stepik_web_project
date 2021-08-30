@@ -1,5 +1,8 @@
 from django.forms import ModelForm
 from .models import Question, Answer
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
 class AskForm(ModelForm):
@@ -13,14 +16,10 @@ class AnswerForm(ModelForm):
         model = Answer
         fields = ['text', 'question']
 
-    # def clean_text(self):
-    # text = self.cleaned_data['text']
-    # if not text.is_valid():
-    # raise forms.ValidationError('question text is wrong')
-    # return text
 
-    # def clean_title(self):
-    # title = self.cleaned_data['title']
-    # if not title.is_valid():
-    # raise forms.ValidationError('title text is wrong')
-    # return title
+class SignUpForm(UserCreationForm):
+    email = forms.EmailField(max_length=254)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
